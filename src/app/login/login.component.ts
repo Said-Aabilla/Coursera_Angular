@@ -7,11 +7,17 @@ import {MatDialog, MatDialogRef,MatDialogModule} from '@angular/material/dialog'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  user = {username: '', password: '', remember: false};
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<LoginComponent>) { }
 
   ngOnInit(): void {
   }
   
+
+  onSubmit() {
+    console.log('User: ', this.user);
+    this.dialogRef.close();
+  }
 
 }
