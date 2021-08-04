@@ -62,6 +62,9 @@
     fxLayoutGap="10px">
 
  <mat-list fxFlex>
+  <div [hidden]="leaders">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+   </div>
    <mat-list-item *ngFor="let leader of leaders">
      <img matListAvatar src={{leader.image}} alt={{leader.name}}>
      <h1 matLine> {{leader.name}} </h1>
@@ -70,7 +73,7 @@
      </p>
    </mat-list-item>
  </mat-list>
-
+ 
 </div>
 
 

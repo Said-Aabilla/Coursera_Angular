@@ -11,12 +11,21 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+//dialogs
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+//template driven forms
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+//reactive forms
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ReactiveFormsModule } from '@angular/forms';
+
+//progresSpiner
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import 'hammerjs';
 //components
@@ -63,6 +72,10 @@ import { LeaderService } from './services/leader.service';
     MatInputModule,
     MatCheckboxModule,
     FormsModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     MatDialog,
