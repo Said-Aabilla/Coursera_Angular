@@ -23,6 +23,9 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatSliderModule} from '@angular/material/slider';
+import { HttpClientModule } from '@angular/common/http';
+import { baseURL } from './shared/baseurl';
 
 //progresSpiner
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -58,6 +61,7 @@ import { LeaderService } from './services/leader.service';
 
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -74,6 +78,7 @@ import { LeaderService } from './services/leader.service';
     FormsModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatSliderModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule
   ],
@@ -85,7 +90,8 @@ import { LeaderService } from './services/leader.service';
     },
     DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    {provide: 'BaseURL', useValue: baseURL}
   ],
   entryComponents: [
     LoginComponent

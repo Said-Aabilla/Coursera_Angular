@@ -1,11 +1,9 @@
-<div class="container"
-  fxLayout="column"
-  fxLayoutGap="10px">
+<div class="container" fxLayout="column" fxLayoutGap="10px">
 
   <div fxFlex>
     <div>
-        <h3>About Us</h3>
-        <hr>
+      <h3>About Us</h3>
+      <hr>
     </div>
   </div>
 
@@ -13,14 +11,18 @@
     <div fxLayout="column" fxLayout.gt-sm="row">
       <div fxFlex="70">
         <h2>Our History</h2>
-        <p>Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong.  Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.</p>
-        <p>The restaurant traces its humble beginnings to <em>The Frying Pan</em>, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.</p>
+        <p>Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par excellence in Hong
+          Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from
+          the A-list clientele in Hong Kong. Featuring four of the best three-star Michelin chefs in the world, you
+          never know what will arrive on your plate the next time you visit us.</p>
+        <p>The restaurant traces its humble beginnings to <em>The Frying Pan</em>, a successful chain started by our
+          CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.</p>
       </div>
       <div fxFlex="30">
         <mat-card>
           <mat-card-header>
             <mat-card-title>
-            <h2>Facts At a Glance</h2>
+              <h2>Facts At a Glance</h2>
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>
@@ -39,12 +41,12 @@
       </div>
     </div>
   </div>
-  
+
   <div fxFlex>
     <mat-card>
       <blockquote>
         <h3>You better cut the pizza in four pieces because
-            I'm not hungry enough to eat six.</h3>
+          I'm not hungry enough to eat six.</h3>
         <footer>-- Yogi Berra,
           <cite>The Wit and Wisdom of Yogi Berra,
             P. Pepe, Diversion Books, 2014</cite>
@@ -57,25 +59,24 @@
   <div fxFlex>
     <h2>Corporate Leadership</h2>
 
-    <div class="container"
-    fxLayout="column"
-    fxLayoutGap="10px">
+    <div class="container" fxLayout="column" fxLayoutGap="10px">
 
- <mat-list fxFlex>
-  <div [hidden]="leaders">
-    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
-   </div>
-   <mat-list-item *ngFor="let leader of leaders">
-     <img matListAvatar src={{leader.image}} alt={{leader.name}}>
-     <h1 matLine> {{leader.name}} </h1>
-     <p matLine>
-       <span> {{leader.description}} </span>
-     </p>
-   </mat-list-item>
- </mat-list>
- 
-</div>
+      <mat-list fxFlex>
+        <div [hidden]="leaders">
+          <mat-spinner></mat-spinner>
+          <h4>Loading . . . Please Wait</h4>
+        </div>
+        <mat-list-item *ngFor="let leader of leaders">
+          <img matListAvatar src={{leader.image}} alt={{leader.name}}>
+          <h1 matLine> {{leader.name}} </h1>
+          <p matLine>
+            <span> {{leader.description}} </span>
+          </p>
+        </mat-list-item>
+      </mat-list>
+
+    </div>
 
 
-</div>
+  </div>
 </div>
