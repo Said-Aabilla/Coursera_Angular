@@ -7,11 +7,18 @@ import { DishService } from '../services/dish.service';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
+import { baseURL } from '../shared/baseurl';
+//animation
+import { visibility , expand } from '../animations/app.animation';
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
-  styleUrls: ['./dishdetail.component.scss']
+  styleUrls: ['./dishdetail.component.scss'],
+  animations: [
+    visibility(),
+    expand()
+  ],
 })
 export class DishdetailComponent implements OnInit {
 
@@ -19,9 +26,12 @@ export class DishdetailComponent implements OnInit {
   dishIds!: string[];
   prev!: string;
   next!: string;
+  dishcopy!: Dish;
+  errMess: any;
   comment!: Comment;
   commentForm!: FormGroup;
-  submittedComment = { name: '', comment: '', rating: '' };
+  BaseURL = baseURL;
+  visibility = 'shown';
 
   formErrors: any = {
     'name': '',
@@ -45,16 +55,20 @@ export class DishdetailComponent implements OnInit {
 
 
 
-  constructor(private dishservice: DishService,
+  constructor(
+    private dishservice: DishService,
     private route: ActivatedRoute,
-    private location: Location, private fb: FormBuilder) {
+    private location: Location,
+    private fb: FormBuilder
+  ) {
     this.createForm();
   }
 
   ngOnInit() {
     this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
-    this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-      .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+    this.route.params.pipe(switchMap((params: Params) => { this.visibility = 'hidden'; return this.dishservice.getDish(+params['id']); }))
+      .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); this.visibility = 'shown'; },
+        errmess => this.errMess = <any>errmess);
   }
 
   goBack(): void {
@@ -70,6 +84,7 @@ export class DishdetailComponent implements OnInit {
   createForm() {
     this.commentForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
+      rating: 5,
       comment: ['', [Validators.required, Validators.minLength(10)]],
     });
 
@@ -79,6 +94,31 @@ export class DishdetailComponent implements OnInit {
     this.onValueChanged();
   }
 
+  onSubmit() {
+    this.comment = this.commentForm.value;
+    this.comment.date = new Date().toISOString();
+    this.dishcopy.comments.push(this.comment);
+    this.dishservice.putDish(this.dishcopy).subscribe(
+      dish => {
+        this.dish = dish;
+        this.dishcopy = dish
+      },
+      errmess => {
+        this.dish = null as any;
+        this.dishcopy = null as any;
+        this.errMess = <any>errmess;
+      }
+    );
+
+    this.commentForm.reset({
+      name: '',
+      rating: 5,
+      comment: '',
+    });
+    this.commentFormDirective.resetForm();
+  }
+
+
   onValueChanged(data?: any) {
     if (!this.commentForm) { return; }
     const form = this.commentForm;
@@ -86,34 +126,18 @@ export class DishdetailComponent implements OnInit {
       if (this.formErrors.hasOwnProperty(field)) {
         // clear previous error message (if any)
         this.formErrors[field] = '';
-        this.submittedComment.comment = '';
-        this.submittedComment.name = '';
-        this.submittedComment.rating = '';
+
         const control = form.get(field);
         if (control && control.dirty && !control.valid) {
           const messages = this.validationMessages[field];
           for (const key in control.errors) {
             if (control.errors.hasOwnProperty(key)) {
               this.formErrors[field] += messages[key] + ' ';
-              this.submittedComment.comment = '';
-              this.submittedComment.name = '';
-              this.submittedComment.rating = '';
+
             }
           }
         }
       }
     }
   }
-
-
-  onSubmit() {
-    this.comment = this.commentForm.value;
-    console.log(this.comment);
-    this.commentForm.reset({
-      name: '',
-      comment: '',
-    });
-    this.commentFormDirective.resetForm();
-  }
-
 }

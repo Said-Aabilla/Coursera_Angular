@@ -1,8 +1,8 @@
 $lt-gray: #ddd;
-$background-dark: #512DA8;
-$background-light: #9575CD;
+$background-dark: #2da864;
+$background-light: #669de4;
 $background-pale: #D1C4E9;
-$background-moredark: #4527A0;
+$background-moredark: #b3b0bd;
 
 
 @mixin zero-margin($pad-up-down, $pad-left-right) {
@@ -10,6 +10,9 @@ $background-moredark: #4527A0;
     padding: $pad-up-down $pad-left-right;
 }
 
+.nav{
+background-color: rgb(89, 107, 243);
+}
 .jumbotron {
     @include zero-margin(70px,30px);
     background: $background-light ;

@@ -1,28 +1,33 @@
 <!-- menu -->
 <div class="container" fxLayout="column" fxLayoutGap="10px">
 
-    <div fxFlex>
-        <div>
-            <h3>Menu</h3>
-            <hr>
-        </div>
+  <div fxFlex>
+    <div>
+      <h3>Menu</h3>
+      <hr>
     </div>
+  </div>
 
-    <div fxFlex *ngIf="dishes">
-        <mat-grid-list cols="2" rowHeight="200px">
-          <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
-            <img height="200px" src="{{BaseURL + dish.image}}"  alt={{dish.name}}>
-                <mat-grid-tile-footer>
-                    <h1>{{dish.name | uppercase}}</h1>
-                </mat-grid-tile-footer>
-            </mat-grid-tile>
-        </mat-grid-list>
-    </div>
-    <div fxFlex *ngIf="errMess">
-      <h2>Error</h2>
-      <h4>{{errMess}}</h4>
-    </div>
-    
+  <div [hidden]="dishes">
+    <mat-spinner></mat-spinner>
+    <h4>Loading . . . Please Wait</h4>
+  </div>
+
+  <div fxFlex *ngIf="dishes">
+    <mat-grid-list cols="2" rowHeight="200px">
+      <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]" appHighlight>
+        <img height="200px" src="{{BaseURL + dish.image}}" alt={{dish.name}}>
+        <mat-grid-tile-footer>
+          <h1>{{dish.name | uppercase}}</h1>
+        </mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+
 </div>
 
 <!--/ menu -->
