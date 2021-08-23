@@ -67,7 +67,7 @@
           <h4>Loading . . . Please Wait</h4>
         </div>
         <mat-list-item *ngFor="let leader of leaders">
-          <img matListAvatar src={{leader.image}} alt={{leader.name}}>
+          <img matListAvatar src="{{ baseURL +leader.image}}" alt={{leader.name}}>
           <h1 matLine> {{leader.name}} </h1>
           <p matLine>
             <span> {{leader.description}} </span>
