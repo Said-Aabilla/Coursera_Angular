@@ -85,6 +85,11 @@
     <h1>Dear {{feedbackCopy.firstname }} Your FeedBack is posted succesfully</h1>
   </div>
 
+  <div *ngIf="submitForm">
+    <mat-spinner></mat-spinner>
+    <h4>Form is submmitting. . . Please Wait</h4>
+  </div>
+
   <div fxFlex *ngIf="errMess">
     <h2>Error</h2>
     <h4>{{errMess}}</h4>

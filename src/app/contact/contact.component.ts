@@ -6,6 +6,7 @@ import { Feedback, ContactType } from '../shared/feedback';
 
 import { flyInOut } from '../animations/app.animation';
 import { FeedbackService } from '../services/feedback.service';
+import {  expand } from '../animations/app.animation';
 
 @Component({
   selector: 'app-contact',
@@ -16,7 +17,8 @@ import { FeedbackService } from '../services/feedback.service';
     'style': 'display: block;'
   },
   animations: [
-    flyInOut()
+    flyInOut(),
+    expand()
   ]
 })
 export class ContactComponent implements OnInit {
@@ -27,6 +29,7 @@ export class ContactComponent implements OnInit {
   contactType = ContactType;
   errMess: any;
   status!: boolean;
+  submitForm: boolean = false;
   formErrors: any = {
     'firstname': '',
     'lastname': '',
@@ -104,10 +107,13 @@ export class ContactComponent implements OnInit {
 
 
   onSubmit() {
+    this.submitForm = true;
     this.feedback = this.feedbackForm.value;
     this.feedbackService.postFeedback(this.feedback).subscribe(
       feedback => {
         this.feedbackCopy = feedback;
+        this.submitForm = false;
+
       },
       errmess => {
         this.feedback = null as any;
@@ -115,7 +121,7 @@ export class ContactComponent implements OnInit {
       }
     );
 
-    this.status= !this.errMess;
+    this.status = !this.errMess;
 
     this.feedbackForm.reset({
       firstname: '',
